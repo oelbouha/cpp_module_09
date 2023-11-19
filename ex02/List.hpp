@@ -53,7 +53,7 @@ class PmergeMeList
 		void			flaten_data(listOflists& V_vec);
 		void			insertion();
 		void			sort_pair_elements(list& vec);
-		bool 			more_than_one_element(listOflists& arr);
+		bool 			more_than_one_pair(listOflists& arr);
 		void			create_main_and_pend(listOflists& arr);
 		void			is_double(int num);
 		void			store_numbers(char **av);

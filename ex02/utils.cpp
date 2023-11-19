@@ -21,7 +21,7 @@ void	is_positive_number(string input)
 	}
 }
 
-bool	PmergeMe::more_than_one_element(vectorOfVectors& arr)
+bool	PmergeMe::more_than_one_pair(vectorOfVectors& arr)
 {
 	size_t i;
 
@@ -39,14 +39,8 @@ bool	PmergeMe::more_than_one_element(vectorOfVectors& arr)
 
 void	PmergeMe::sort_pair_elements(PmergeMe::vector& vec)
 {
-	int		temp;
-
 	if (vec[0] > vec[1])
-	{
-		temp = vec[0];
-		vec[0] = vec[1];
-		vec[1] = temp;
-	}
+		std::swap(vec[0], vec[1]);
 }
 
 void	PmergeMe::is_double(int num)

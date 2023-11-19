@@ -133,25 +133,17 @@ void	PmergeMe::create_main_and_pend(vectorOfVectors& V_vec)
 
 void	PmergeMe::sort_elements(vectorOfVectors& arr)
 {
-	vector	temp;
 	vector	second;
 	vector	first;
-	int		size;
 
-	size = arr.size();
-	for (int i = 0; i < size;)
+	for (size_t i = 0; i < arr.size(); i += 2)
 	{
 		first = arr[i];
 		second = arr[i + 1];
 		if (second.size() != elementSize)
 			break ;
 		else if (first.back() > second.back())
-		{
 			std::swap(arr[i], arr[i + 1]);
-			i += 2;
-		}
-		else
-			i += 2;
 	}
 }
 
@@ -232,7 +224,7 @@ void	PmergeMe::mergeSort()
 	elementSize *= 2;
 	V_vec = Sort_paires();
 	flaten_data(V_vec);
-	if (more_than_one_element(V_vec))
+	if (more_than_one_pair(V_vec))
 		mergeSort();
 	insertion();
 }

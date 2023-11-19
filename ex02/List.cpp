@@ -41,7 +41,7 @@ void	PmergeMeList::is_double(int num)
 		throw std::invalid_argument("There is double");
 }
 
-bool	PmergeMeList::more_than_one_element(listOflists& arr)
+bool	PmergeMeList::more_than_one_pair(listOflists& arr)
 {
 	ite_to_lstOflists cur;
 
@@ -281,7 +281,7 @@ void	PmergeMeList::mergeSort()
 	elementSize *= 2;
 	V_vec = Sort_paires();
 	flaten_data(V_vec);
-	if (more_than_one_element(V_vec))
+	if (more_than_one_pair(V_vec))
 		mergeSort();
 	insertion();
 }

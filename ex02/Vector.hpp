@@ -51,7 +51,7 @@ class PmergeMe
 		void				flaten_data(vectorOfVectors& V_vec);
 		void				insertion();
 		void				sort_pair_elements(vector& vec);
-		bool 				more_than_one_element(vectorOfVectors& arr);
+		bool 				more_than_one_pair(vectorOfVectors& arr);
 		void				create_main_and_pend(vectorOfVectors& arr);
 		void				update_pend(iterator_to_vecOfVectors it);
 		void				is_double(int num);

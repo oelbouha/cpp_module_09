@@ -40,18 +40,12 @@ bool	PmergeMe::more_than_one_element(vectorOfVectors& arr)
 void	PmergeMe::sort_pair_elements(PmergeMe::vector& vec)
 {
 	int		temp;
-	size_t	i;
 
-	i = -1;
-	while (++i < vec.size() - 1)
+	if (vec[0] > vec[1])
 	{
-		if (vec[i] > vec[i + 1])
-		{
-			temp = vec[i + 1];
-			vec[i + 1] = vec[i];
-			vec[i] = temp;
-			i = -1;
-		}
+		temp = vec[0];
+		vec[0] = vec[1];
+		vec[1] = temp;
 	}
 }
 

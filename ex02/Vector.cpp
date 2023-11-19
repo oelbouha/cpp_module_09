@@ -94,11 +94,11 @@ void	PmergeMe::insert_pend_to_main()
 
 void	PmergeMe::insertion()
 {
-	elementSize /= 2;
 	V_vec = make_paires();
 	create_main_and_pend(V_vec);
 	insert_pend_to_main();
 	flaten_data(mainChain);
+	elementSize /= 2;
 }
 
 void	PmergeMe::create_main_and_pend(vectorOfVectors& V_vec)
@@ -139,21 +139,19 @@ void	PmergeMe::sort_elements(vectorOfVectors& arr)
 	int		size;
 
 	size = arr.size();
-	for (int i = 0; i < size - 1;)
+	for (int i = 0; i < size;)
 	{
 		first = arr[i];
 		second = arr[i + 1];
 		if (second.size() != elementSize)
 			break ;
-		if (first.back() > second.back())
+		else if (first.back() > second.back())
 		{
 			std::swap(arr[i], arr[i + 1]);
-			--i;
-			if (i < 0)
-				i = 0;
+			i += 2;
 		}
 		else
-			++i;
+			i += 2;
 	}
 }
 
@@ -184,7 +182,8 @@ PmergeMe::vectorOfVectors	PmergeMe::create_paires()
 			vec.push_back(*it);
 			it++;
 		}
-		sort_pair_elements(vec);
+		if (elementSize == 2)
+			sort_pair_elements(vec);
 		V_vec.push_back(vec);
 		vec.clear();
 	}

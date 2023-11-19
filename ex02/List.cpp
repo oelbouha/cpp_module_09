@@ -90,25 +90,10 @@ void	PmergeMeList::sort_pair_elements(list& vec)
 	list_iterator	cur;
 
 	it = vec.begin();
-	next = vec.begin();
+	next = it;
 	++next;
-	cur = it;
-	while (it != vec.end() && next != vec.end())
-	{
-		if (*it > *next)
-		{
-			int temp = *it;
-			*it = *next;
-			*next = temp;
-			it = vec.begin();
-			next = it;
-			++next;
-		}
-		else{
-			++it;
-			++next;
-		}
-	}
+	if (*next < *it)
+		std::iter_swap(it, next);
 }
 
 PmergeMeList::listOflists	PmergeMeList::create_paires()
@@ -127,7 +112,8 @@ PmergeMeList::listOflists	PmergeMeList::create_paires()
 			vec.push_back(*it);
 			++it;
 		}
-		sort_pair_elements(vec);
+		if (elementSize == 2)
+			sort_pair_elements(vec);
 		V_vec.push_back(vec);
 		vec.clear();
 	}
@@ -159,27 +145,19 @@ void	PmergeMeList::sort_elements(listOflists& arr)
 {
 	ite_to_lstOflists cur;
 	ite_to_lstOflists next;
-	list	temp;
-	list	second;
-	list	first;
 
 	next = arr.begin();
 	++next;
-	for (cur = arr.begin(); cur != arr.end() && next != arr.end(); )
+	cur = arr.begin();
+	for (size_t i = 0; i < arr.size();)
 	{
-		if (next->size() != elementSize)
+		if (next == arr.end() || next->size() != elementSize)
 			break ;
-		if (cur->back() > next->back())
-		{
+		else if (cur->back() > next->back())
 			std::iter_swap(cur, next);
-			cur = arr.begin();
-			next = cur;
-			++next;
-		}
-		else{
-			++cur;
-			++next;
-		}
+		std::advance(next, 2);
+		std::advance(cur, 2);
+		i += 2;
 	}
 }
 
@@ -212,6 +190,7 @@ void	PmergeMeList::create_main_and_pend(listOflists& V_vec)
 {
 	ite_to_lstOflists	it;
 	ite_to_lstOflists	cur;
+	list_iterator		tmp;
 	pend_pair			pair;
 	list				temp;
 
@@ -224,8 +203,11 @@ void	PmergeMeList::create_main_and_pend(listOflists& V_vec)
 	mainChain.clear();
 	mainChain.push_back(V_vec.front());
 	V_vec.pop_front();
-	it = mainChain.insert(mainChain.end(), V_vec.front());
-	V_vec.pop_front();
+	if (V_vec.size())
+	{
+		mainChain.push_back(V_vec.front());
+		V_vec.pop_front();
+	}
 	while (V_vec.size())
 	{
 		pair.first = V_vec.front();
@@ -285,11 +267,11 @@ void	PmergeMeList::insert_pend_to_main()
 
 void	PmergeMeList::insertion()
 {
-	elementSize /= 2;
 	V_vec = make_paires();
 	create_main_and_pend(V_vec);
 	insert_pend_to_main();
 	flaten_data(mainChain);
+	elementSize /= 2;
 }
 
 void	PmergeMeList::mergeSort()
@@ -315,9 +297,3 @@ void	PmergeMeList::print_container_elements(list vec)
 		cur++;	
 	}
 }
-
-
-
-
-
-

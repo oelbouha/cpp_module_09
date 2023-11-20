@@ -36,6 +36,7 @@ class PmergeMeList
 		size_t				elementSize;
 		pend 				pendChain;
 		long				odd_number;
+		bool				first_step;
 
 	public:
 		PmergeMeList();

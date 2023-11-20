@@ -22,7 +22,8 @@ void	sort_using_vector(char **av)
 
 	vec.store_numbers(av);
 	start = std::chrono::high_resolution_clock::now();
-	vec.mergeSort();
+	if (vec.getData().size() != 1)
+		vec.mergeSort();
 	end = std::chrono::high_resolution_clock::now();
 	std::chrono::microseconds duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 	cout << "before : ";
@@ -30,7 +31,8 @@ void	sort_using_vector(char **av)
 	cout << endl << "after  : ";
 	vec.print_container_elements(vec.getData());
 	cout << endl << "Time to process a range of " << vec.getDataSize();
-	cout << " elements with std::list : " << duration.count() << " us" << endl;
+	cout << " elements with std::vector : " << duration.count() << " us" << endl;
+	cout << "Is sorted : " << (std::is_sorted(vec.getData().begin(), vec.getData().end()) ? "no" : "yes") << endl;
 	cout << endl;
 }
 
@@ -42,7 +44,8 @@ void	sort_using_list(char **av)
 
 	list.store_numbers(av);
 	start = std::chrono::high_resolution_clock::now();
-	list.mergeSort();
+	if (list.getData().size() != 1)
+		list.mergeSort();
 	end = std::chrono::high_resolution_clock::now();
 	std::chrono::microseconds duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
 	cout << "before : ";
@@ -51,6 +54,7 @@ void	sort_using_list(char **av)
 	list.print_container_elements(list.getData());
 	cout << endl << "Time to process a range of " << list.getDataSize();
 	cout << " elements with std::list : " << duration.count() << " us" << endl;
+	cout << "Is sorted : " << (std::is_sorted(list.getData().begin(), list.getData().end()) ? "no" : "yes") << endl;
 }
 
 

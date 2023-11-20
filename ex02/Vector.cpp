@@ -14,6 +14,7 @@
 
 PmergeMe::PmergeMe()
 {
+	first_step = false;
 	odd_number = -1;
 	elementSize = 1;
 }
@@ -136,7 +137,7 @@ void	PmergeMe::sort_elements(vectorOfVectors& arr)
 	vector	second;
 	vector	first;
 
-	for (size_t i = 0; i < arr.size(); i += 2)
+	for (size_t i = 0; i < arr.size() - 1; i += 2)
 	{
 		first = arr[i];
 		second = arr[i + 1];
@@ -153,6 +154,7 @@ PmergeMe::vectorOfVectors	PmergeMe::Sort_paires()
 	vectorOfVectors				V_vec;
 	vector_iterator				it;
 	
+	first_step = true;
 	V_vec = make_paires();
 	sort_elements(V_vec);
 	return (V_vec);
@@ -221,7 +223,8 @@ void	PmergeMe::mergeSort()
 {
 	if (data.size() == 1)
 		return ;
-	elementSize *= 2;
+	if (first_step)
+		elementSize *= 2;
 	V_vec = Sort_paires();
 	flaten_data(V_vec);
 	if (more_than_one_pair(V_vec))

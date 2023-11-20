@@ -35,6 +35,7 @@ class PmergeMe
 		vector 				data;
 		vector 				copy;
 		vector 				rest;
+		bool				first_step;
 
 	public:
 		PmergeMe();

@@ -14,6 +14,7 @@
 
 PmergeMeList::PmergeMeList()
 {
+	first_step = false;
 	odd_number = -1;
 	elementSize = 1;
 }
@@ -149,7 +150,7 @@ void	PmergeMeList::sort_elements(listOflists& arr)
 	next = arr.begin();
 	++next;
 	cur = arr.begin();
-	for (size_t i = 0; i < arr.size();)
+	for (size_t i = 0; i < arr.size() - 1;)
 	{
 		if (next == arr.end() || next->size() != elementSize)
 			break ;
@@ -167,6 +168,7 @@ PmergeMeList::listOflists	PmergeMeList::Sort_paires()
 	listOflists			V_vec;
 	listOflists			it;
 	
+	first_step = true;
 	V_vec = make_paires();
 	sort_elements(V_vec);
 	return (V_vec);
@@ -276,9 +278,8 @@ void	PmergeMeList::insertion()
 
 void	PmergeMeList::mergeSort()
 {
-	if (data.size() == 1)
-		return ;
-	elementSize *= 2;
+	if (first_step)
+		elementSize *= 2;
 	V_vec = Sort_paires();
 	flaten_data(V_vec);
 	if (more_than_one_pair(V_vec))

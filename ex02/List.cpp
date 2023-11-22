@@ -15,6 +15,7 @@
 PmergeMeList::PmergeMeList()
 {
 	first_step = false;
+	sort = false;
 	odd_number = -1;
 	elementSize = 1;
 }
@@ -113,8 +114,11 @@ PmergeMeList::listOflists	PmergeMeList::create_paires()
 			vec.push_back(*it);
 			++it;
 		}
-		if (elementSize == 2)
+		if (sort == false && elementSize == 2)
+		{
 			sort_pair_elements(vec);
+			sort = true;
+		}
 		V_vec.push_back(vec);
 		vec.clear();
 	}

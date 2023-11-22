@@ -37,6 +37,7 @@ class PmergeMeList
 		pend 				pendChain;
 		long				odd_number;
 		bool				first_step;
+		bool				sort;
 
 	public:
 		PmergeMeList();

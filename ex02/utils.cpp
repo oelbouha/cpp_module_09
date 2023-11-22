@@ -37,11 +37,7 @@ bool	PmergeMe::more_than_one_pair(vectorOfVectors& arr)
 	return false;
 }
 
-void	PmergeMe::sort_pair_elements(PmergeMe::vector& vec)
-{
-	if (vec[0] > vec[1])
-		std::swap(vec[0], vec[1]);
-}
+
 
 void	PmergeMe::is_double(int num)
 {

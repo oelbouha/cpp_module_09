@@ -18,13 +18,10 @@
 class PmergeMe
 {
 	public:
-		typedef	std::vector<int>						vector;
-		typedef std::vector<vector>						vectorOfVectors;
-		typedef std::vector<vector>::iterator			iterator_to_vecOfVectors;
-		typedef	std::vector<int>::iterator				vector_iterator;
-		typedef std::pair<vector, iterator_to_vecOfVectors>		pend_pair;
-		typedef std::vector<std::pair<vector, iterator_to_vecOfVectors> >		pend;
-		typedef std::vector<std::pair<vector, iterator_to_vecOfVectors> >::iterator		pend_iterator;
+		typedef	std::vector<int>									vector;
+		typedef std::vector<vector>									vectorOfVectors;
+		typedef std::pair<vector, vectorOfVectors::iterator>		pend_pair;
+		typedef std::vector<pend_pair>								pend;
 
 	private:
 		vectorOfVectors		mainChain;
@@ -35,8 +32,6 @@ class PmergeMe
 		vector 				data;
 		vector 				copy;
 		vector 				rest;
-		bool				first_step;
-		bool				sort;
 
 	public:
 		PmergeMe();
@@ -52,10 +47,9 @@ class PmergeMe
 		void				sort_elements(vectorOfVectors& arr);
 		void				flaten_data(vectorOfVectors& V_vec);
 		void				insertion();
-		void				sort_pair_elements(vector& vec);
 		bool 				more_than_one_pair(vectorOfVectors& arr);
 		void				create_main_and_pend(vectorOfVectors& arr);
-		void				update_pend(iterator_to_vecOfVectors it);
+		void				update_pend(vectorOfVectors::iterator it);
 		void				is_double(int num);
 		void				store_numbers(char **av);
 		void				mergeSort();

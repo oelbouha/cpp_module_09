@@ -14,8 +14,6 @@
 
 PmergeMeList::PmergeMeList()
 {
-	first_step = false;
-	sort = false;
 	odd_number = -1;
 	elementSize = 1;
 }
@@ -36,7 +34,7 @@ PmergeMeList::~PmergeMeList(){}
 
 void	PmergeMeList::is_double(int num)
 {
-	list_iterator	it;
+	list::iterator	it;
 
 	it = std::find(data.begin(), data.end(), num);
 	if (it != data.end())
@@ -45,22 +43,18 @@ void	PmergeMeList::is_double(int num)
 
 bool	PmergeMeList::more_than_one_pair(listOflists& arr)
 {
-	ite_to_lstOflists cur;
+	listOflists::iterator cur;
 
 	cur = arr.begin();
 	if (cur->size() == elementSize)
 		++cur;
 	if (cur->size() == elementSize)
 		++cur;
-	while (cur != arr.end())
+	if (cur->size() == elementSize)
 	{
-		if (cur->size() == elementSize)
-		{
-			++cur;
-			if (cur->size() == elementSize)
-				return true;
-		}
 		++cur;
+		if (cur->size() == elementSize)
+			return true;
 	}
 	return false;
 }
@@ -85,22 +79,9 @@ bool compare(PmergeMeList::list first, PmergeMeList::list second)
 	return (first.back() < second.back());
 }
 
-void	PmergeMeList::sort_pair_elements(list& vec)
-{
-	list_iterator	it;
-	list_iterator	next;
-	list_iterator	cur;
-
-	it = vec.begin();
-	next = it;
-	++next;
-	if (*next < *it)
-		std::iter_swap(it, next);
-}
-
 PmergeMeList::listOflists	PmergeMeList::create_paires()
 {
-	list_iterator	it;
+	list::iterator	it;
 	listOflists		V_vec;
 	list			vec;
 	size_t			i;
@@ -114,11 +95,6 @@ PmergeMeList::listOflists	PmergeMeList::create_paires()
 			vec.push_back(*it);
 			++it;
 		}
-		if (sort == false && elementSize == 2)
-		{
-			sort_pair_elements(vec);
-			sort = true;
-		}
 		V_vec.push_back(vec);
 		vec.clear();
 	}
@@ -127,7 +103,7 @@ PmergeMeList::listOflists	PmergeMeList::create_paires()
 
 PmergeMeList::listOflists	PmergeMeList::make_paires()
 {
-	ite_to_lstOflists		it;
+	listOflists::iterator	it;
 	listOflists				V_vec;
 	list					temp;
 
@@ -148,8 +124,8 @@ PmergeMeList::listOflists	PmergeMeList::make_paires()
 
 void	PmergeMeList::sort_elements(listOflists& arr)
 {
-	ite_to_lstOflists cur;
-	ite_to_lstOflists next;
+	listOflists::iterator cur;
+	listOflists::iterator next;
 
 	next = arr.begin();
 	++next;
@@ -168,11 +144,10 @@ void	PmergeMeList::sort_elements(listOflists& arr)
 
 PmergeMeList::listOflists	PmergeMeList::Sort_paires()
 {
-	ite_to_lstOflists	cur;
-	listOflists			V_vec;
-	listOflists			it;
+	listOflists::iterator	cur;
+	listOflists				V_vec;
+	listOflists				it;
 	
-	first_step = true;
 	V_vec = make_paires();
 	sort_elements(V_vec);
 	return (V_vec);
@@ -180,13 +155,13 @@ PmergeMeList::listOflists	PmergeMeList::Sort_paires()
 
 void	PmergeMeList::flaten_data(PmergeMeList::listOflists& V_vec)
 {
-	ite_to_lstOflists	V_it;
-	list_iterator 		it;
+	listOflists::iterator	cur;
+	list::iterator 			it;
 
 	data.clear();
-	for (V_it = V_vec.begin(); V_it != V_vec.end(); ++V_it)
+	for (cur = V_vec.begin(); cur != V_vec.end(); ++cur)
 	{
-		for (it = V_it->begin(); it != V_it->end(); ++it)
+		for (it = cur->begin(); it != cur->end(); ++it)
 			data.push_back(*it);
 	}
 }
@@ -194,11 +169,11 @@ void	PmergeMeList::flaten_data(PmergeMeList::listOflists& V_vec)
 
 void	PmergeMeList::create_main_and_pend(listOflists& V_vec)
 {
-	ite_to_lstOflists	it;
-	ite_to_lstOflists	cur;
-	list_iterator		tmp;
-	pend_pair			pair;
-	list				temp;
+	listOflists::iterator	it;
+	listOflists::iterator	cur;
+	list::iterator			tmp;
+	pend_pair				pair;
+	list					temp;
 
 	if (V_vec.back().size() != V_vec.begin()->size())
 	{
@@ -230,11 +205,11 @@ void	PmergeMeList::create_main_and_pend(listOflists& V_vec)
 
 void	PmergeMeList::insert_pend_to_main()
 {
-	ite_to_lstOflists	pos;
-	ite_to_lstOflists	it;
-	pend_iterator		P_it;
-	pend_iterator		end;
-	pend_iterator		start;
+	listOflists::iterator	pos;
+	listOflists::iterator	it;
+	pend::iterator			P_it;
+	pend::iterator			end;
+	pend::iterator			start;
 	int		idx;
 
 	long int jcb_stl[] = {
@@ -282,18 +257,19 @@ void	PmergeMeList::insertion()
 
 void	PmergeMeList::mergeSort()
 {
-	if (first_step)
-		elementSize *= 2;
 	V_vec = Sort_paires();
 	flaten_data(V_vec);
 	if (more_than_one_pair(V_vec))
+	{
+		elementSize *= 2;
 		mergeSort();
+	}
 	insertion();
 }
 
 void	PmergeMeList::print_container_elements(list vec)
 {
-	list_iterator cur;
+	list::iterator cur;
 
 	cur = vec.begin();
 	while (cur != vec.end())

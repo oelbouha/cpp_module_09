@@ -12,17 +12,8 @@
 
 #include "Vector.hpp"
 
-
-void	PmergeMe::sort_pair_elements(PmergeMe::vector& vec)
-{
-	if (vec[0] > vec[1])
-		std::swap(vec[0], vec[1]);
-}
-
 PmergeMe::PmergeMe()
 {
-	first_step = false;
-	sort = false;
 	odd_number = -1;
 	elementSize = 1;
 }
@@ -46,24 +37,24 @@ bool compare(PmergeMe::vector first, PmergeMe::vector second)
 	return (first.back() < second.back());
 }
 
-void	PmergeMe::update_pend(iterator_to_vecOfVectors it)
+void	PmergeMe::update_pend(vectorOfVectors::iterator pos)
 {
-	pend_iterator P_it;
+	pend::iterator it;
 
-	for (P_it = pendChain.begin(); P_it != pendChain.end(); ++P_it)
+	for (it = pendChain.begin(); it != pendChain.end(); ++it)
 	{
-		if (P_it->second >= it)
-			++P_it->second;
+		if (it->second >= pos)
+			++it->second;
 	}
 }
 
 void	PmergeMe::insert_pend_to_main()
 {
-	iterator_to_vecOfVectors	pos;
-	iterator_to_vecOfVectors	it;
-	pend_iterator	P_it;
-	pend_iterator	end;
-	pend_iterator	start;
+	vectorOfVectors::iterator	pos;
+	vectorOfVectors::iterator	it;
+	pend::iterator				P_it;
+	pend::iterator				end;
+	pend::iterator				start;
 	int	idx;
 
 	long int jcb_stl[] = {
@@ -112,8 +103,8 @@ void	PmergeMe::insertion()
 
 void	PmergeMe::create_main_and_pend(vectorOfVectors& V_vec)
 {
-	iterator_to_vecOfVectors it;
-	iterator_to_vecOfVectors cur;
+	vectorOfVectors::iterator it;
+	vectorOfVectors::iterator cur;
 	pend_pair	pair;
 	size_t		i;
 
@@ -153,17 +144,15 @@ void	PmergeMe::sort_elements(vectorOfVectors& arr)
 			break ;
 		else if (first.back() > second.back())
 			std::swap(arr[i], arr[i + 1]);
-
 	}
 }
 
 PmergeMe::vectorOfVectors	PmergeMe::Sort_paires()
 {
-	iterator_to_vecOfVectors	cur;
+	vectorOfVectors::iterator	cur;
 	vectorOfVectors				V_vec;
-	vector_iterator				it;
+	vector::iterator			it;
 	
-	first_step = true;
 	V_vec = make_paires();
 	sort_elements(V_vec);
 	return (V_vec);
@@ -172,9 +161,9 @@ PmergeMe::vectorOfVectors	PmergeMe::Sort_paires()
 PmergeMe::vectorOfVectors	PmergeMe::create_paires()
 {
 	vectorOfVectors		V_vec;
-	vector_iterator		it;
-	vector		vec;
-	size_t		i;
+	vector::iterator	it;
+	vector				vec;
+	size_t				i;
 
 	it = data.begin();
 	while (it != data.end())
@@ -185,11 +174,6 @@ PmergeMe::vectorOfVectors	PmergeMe::create_paires()
 			vec.push_back(*it);
 			it++;
 		}
-		if (sort == false && elementSize == 2)
-		{
-			sort_pair_elements(vec);
-			sort = true;
-		}
 		V_vec.push_back(vec);
 		vec.clear();
 	}
@@ -199,7 +183,7 @@ PmergeMe::vectorOfVectors	PmergeMe::create_paires()
 PmergeMe::vectorOfVectors	PmergeMe::make_paires()
 {
 	vectorOfVectors		V_vec;
-	vector_iterator		it;
+	vector::iterator	it;
 
 	if (data.size() % 2)
 	{
@@ -219,14 +203,13 @@ PmergeMe::vectorOfVectors	PmergeMe::make_paires()
 
 void	PmergeMe::flaten_data(vectorOfVectors& V_vec)
 {
-	iterator_to_vecOfVectors	V_it;
-	vector_iterator 	it;
+	vectorOfVectors::iterator	V_it;
+	vector::iterator 			it;
 
 	data.clear();
-	V_it = V_vec.begin();
-	for (; V_it != V_vec.end(); V_it++)
+	for (V_it = V_vec.begin(); V_it != V_vec.end(); ++V_it)
 	{
-		for (it = V_it->begin(); it != V_it->end(); it++)
+		for (it = V_it->begin(); it != V_it->end(); ++it)
 			data.push_back(*it);
 	}
 }
@@ -235,11 +218,12 @@ void	PmergeMe::mergeSort()
 {
 	if (data.size() == 1)
 		return ;
-	if (first_step)
-		elementSize *= 2;
 	V_vec = Sort_paires();
 	flaten_data(V_vec);
 	if (more_than_one_pair(V_vec))
+	{
+		elementSize *= 2;
 		mergeSort();
+	}
 	insertion();
 }

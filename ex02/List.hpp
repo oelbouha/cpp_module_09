@@ -19,25 +19,20 @@
 class PmergeMeList
 {
 	public:
-		typedef	std::list<int>							list;
-		typedef std::list<list>							listOflists;
-		typedef std::list<list>::iterator				ite_to_lstOflists;
-		typedef	std::list<int>::iterator				list_iterator;
-		typedef std::pair<list, ite_to_lstOflists>		pend_pair;
-		typedef std::list<std::pair<list, ite_to_lstOflists> >				pend;
-		typedef std::list<std::pair<list, ite_to_lstOflists> >::iterator	pend_iterator;
+		typedef	std::list<int>								list;
+		typedef std::list<list>								listOflists;
+		typedef std::pair<list, listOflists::iterator>		pend_pair;
+		typedef std::list<pend_pair >						pend;
 
 	private:
 		listOflists			mainChain;
 		listOflists			V_vec;
+		pend 				pendChain;
 		list 				data;
 		list 				copy;
 		list 				rest;
 		size_t				elementSize;
-		pend 				pendChain;
 		long				odd_number;
-		bool				first_step;
-		bool				sort;
 
 	public:
 		PmergeMeList();
@@ -54,7 +49,6 @@ class PmergeMeList
 		void			sort_elements(listOflists& arr);
 		void			flaten_data(listOflists& V_vec);
 		void			insertion();
-		void			sort_pair_elements(list& vec);
 		bool 			more_than_one_pair(listOflists& arr);
 		void			create_main_and_pend(listOflists& arr);
 		void			is_double(int num);

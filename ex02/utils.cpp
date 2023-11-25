@@ -14,7 +14,7 @@
 
 void	is_positive_number(string input)
 {
-	for(int i = 0; input[i]; i++)
+	for(int i = 0; input[i]; ++i)
 	{
 		if (!isdigit(input[i]))
 			std::invalid_argument("Not a positive number");
@@ -28,20 +28,14 @@ bool	PmergeMe::more_than_one_pair(vectorOfVectors& arr)
 	i = 0;
 	if (arr[0].size() == elementSize && arr[1].size() == elementSize)
 		i += 2;
-	while (i < arr.size() - 1)
-	{
-		if (arr[i].size() == elementSize && arr[i + 1].size() == elementSize)
-		 	return true;
-		i++;
-	}
+	if (arr[i].size() == elementSize && arr[i + 1].size() == elementSize)
+		return true;
 	return false;
 }
 
-
-
 void	PmergeMe::is_double(int num)
 {
-	vector_iterator it;
+	vector::iterator it;
 
 	it = std::find(data.begin(), data.end(), num);
 	if (it != data.end())

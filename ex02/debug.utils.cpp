@@ -14,7 +14,7 @@
 
 void	PmergeMe::print_container_elements(vector vec)
 {
-	vector_iterator cur;
+	vector::iterator cur;
 
 	cur = vec.begin();
 	while (cur != vec.end())
@@ -26,8 +26,8 @@ void	PmergeMe::print_container_elements(vector vec)
 
 void	PmergeMe::print_array_vectors(vectorOfVectors vec, string str)
 {
-	iterator_to_vecOfVectors	cur;
-	vector_iterator 	it;
+	vectorOfVectors::iterator	cur;
+	vector::iterator 	it;
 	vector	temp;
 
 	cout << str << ": \n{";
@@ -45,9 +45,9 @@ void	PmergeMe::print_array_vectors(vectorOfVectors vec, string str)
 
 void	PmergeMe::print_pendCain()
 {
-	iterator_to_vecOfVectors scnd;
-	pend_iterator it;
-	vector_iterator cur;
+	vectorOfVectors::iterator	scnd;
+	pend::iterator 				it;
+	vector::iterator 			cur;
 
 	printf("	--++++++++++++++++++++++++++++--    \n");
 	cout << "pendChain" << ": \n{ \n";

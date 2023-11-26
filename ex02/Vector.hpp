@@ -36,7 +36,6 @@ class PmergeMe
 		~PmergeMe();
 
 		vectorOfVectors		Sort_paires();
-		vectorOfVectors		make_paires();
 		vectorOfVectors		create_paires();
 		size_t				getDataSize();
 		vector				getData();

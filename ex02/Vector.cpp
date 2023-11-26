@@ -154,7 +154,7 @@ PmergeMe::vectorOfVectors	PmergeMe::Sort_paires()
 	vectorOfVectors				V_vec;
 	vector::iterator			it;
 	
-	V_vec = make_paires();
+	V_vec = create_paires();
 	sort_elements(V_vec);
 	return (V_vec);
 }
@@ -179,11 +179,6 @@ PmergeMe::vectorOfVectors	PmergeMe::create_paires()
 		vec.clear();
 	}
 	return (V_vec);
-}
-
-PmergeMe::vectorOfVectors	PmergeMe::make_paires()
-{
-	return (create_paires());
 }
 
 void	PmergeMe::flaten_data(vectorOfVectors& V_vec)

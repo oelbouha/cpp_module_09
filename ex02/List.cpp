@@ -101,11 +101,6 @@ PmergeMeList::listOflists	PmergeMeList::create_paires()
 	return (V_vec);
 }
 
-PmergeMeList::listOflists	PmergeMeList::make_paires()
-{
-	return (create_paires());
-}
-
 void	PmergeMeList::sort_elements(listOflists& arr)
 {
 	listOflists::iterator cur;
@@ -132,7 +127,7 @@ PmergeMeList::listOflists	PmergeMeList::Sort_paires()
 	listOflists				V_vec;
 	listOflists				it;
 	
-	V_vec = make_paires();
+	V_vec = create_paires();
 	sort_elements(V_vec);
 	return (V_vec);
 }

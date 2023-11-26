@@ -39,7 +39,6 @@ class PmergeMeList
 		~PmergeMeList();
 
 		listOflists		Sort_paires();
-		listOflists		make_paires();
 		listOflists		create_paires();
 	
 		size_t			getDataSize();

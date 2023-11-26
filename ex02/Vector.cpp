@@ -14,7 +14,6 @@
 
 PmergeMe::PmergeMe()
 {
-	odd_number = -1;
 	elementSize = 1;
 }
 
@@ -94,6 +93,8 @@ void	PmergeMe::insert_pend_to_main()
 
 void	PmergeMe::insertion()
 {
+	vectorOfVectors		V_vec;
+
 	V_vec = make_paires();
 	create_main_and_pend(V_vec);
 	insert_pend_to_main();
@@ -182,23 +183,7 @@ PmergeMe::vectorOfVectors	PmergeMe::create_paires()
 
 PmergeMe::vectorOfVectors	PmergeMe::make_paires()
 {
-	vectorOfVectors		V_vec;
-	vector::iterator	it;
-
-	if (data.size() % 2)
-	{
-		odd_number = data.back();
-		data.pop_back();
-	}
-	V_vec = create_paires();
-	if (odd_number != -1)
-	{
-		vector temp;
-		temp.push_back(odd_number);
-		V_vec.push_back(temp);
-		odd_number = -1;
-	}
-	return (V_vec);
+	return (create_paires());
 }
 
 void	PmergeMe::flaten_data(vectorOfVectors& V_vec)
@@ -216,6 +201,8 @@ void	PmergeMe::flaten_data(vectorOfVectors& V_vec)
 
 void	PmergeMe::mergeSort()
 {
+	vectorOfVectors		V_vec;
+
 	if (data.size() == 1)
 		return ;
 	V_vec = Sort_paires();

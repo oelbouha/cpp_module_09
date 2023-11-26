@@ -103,23 +103,7 @@ PmergeMeList::listOflists	PmergeMeList::create_paires()
 
 PmergeMeList::listOflists	PmergeMeList::make_paires()
 {
-	listOflists::iterator	it;
-	listOflists				V_vec;
-	list					temp;
-
-	if (data.size() % 2)
-	{
-		odd_number = data.back();
-		data.pop_back();
-	}
-	V_vec = create_paires();
-	if (odd_number != -1)
-	{
-		temp.push_back(odd_number);
-		V_vec.push_back(temp);
-		odd_number = -1;
-	}
-	return (V_vec);
+	return (create_paires());
 }
 
 void	PmergeMeList::sort_elements(listOflists& arr)

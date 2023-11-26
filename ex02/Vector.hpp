@@ -25,10 +25,8 @@ class PmergeMe
 
 	private:
 		vectorOfVectors		mainChain;
-		vectorOfVectors		V_vec;
 		pend 				pendChain;
 		size_t				elementSize;
-		long				odd_number;
 		vector 				data;
 		vector 				copy;
 		vector 				rest;

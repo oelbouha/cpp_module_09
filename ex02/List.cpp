@@ -227,11 +227,10 @@ void	PmergeMeList::insert_pend_to_main()
 
 void	PmergeMeList::insertion()
 {
-	V_vec = make_paires();
+	V_vec = create_paires();
 	create_main_and_pend(V_vec);
 	insert_pend_to_main();
 	flaten_data(mainChain);
-	elementSize /= 2;
 }
 
 void	PmergeMeList::mergeSort()

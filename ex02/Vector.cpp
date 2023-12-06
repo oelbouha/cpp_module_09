@@ -95,11 +95,10 @@ void	PmergeMe::insertion()
 {
 	vectorOfVectors		V_vec;
 
-	V_vec = make_paires();
+	V_vec = create_paires();
 	create_main_and_pend(V_vec);
 	insert_pend_to_main();
 	flaten_data(mainChain);
-	elementSize /= 2;
 }
 
 void	PmergeMe::create_main_and_pend(vectorOfVectors& V_vec)
